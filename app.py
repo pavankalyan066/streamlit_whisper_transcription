@@ -53,8 +53,8 @@ def transcribe_audio(file_path):
     :param file_path: The path of the audio file to transcribe
     :return: The transcribed text
     """
-    with open(file_path, "rb") as audio_file:
-        transcript = transcribe(audio_file)
+    # with open(file_path, "rb") as audio_file:
+    transcript = transcribe(file_path)
 
     return transcript["text"]
 
