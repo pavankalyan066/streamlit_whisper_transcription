@@ -60,7 +60,7 @@ def transcribe_audio(file_path):
     # with open(file_path, "rb") as audio_file:
     transcript = transcribe(file_path)
 
-    text = transcript['transcript']
+    text = transcript['text']
     
     messages = [
         Message(role="system", content="Act as a expert English Tutor"),
