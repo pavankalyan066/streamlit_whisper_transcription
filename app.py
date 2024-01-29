@@ -56,7 +56,7 @@ def transcribe_audio(file_path):
     # with open(file_path, "rb") as audio_file:
     transcript = transcribe(file_path)
 
-    return transcript["text"]
+    return transcript
 
 
 def main():
