@@ -4,6 +4,7 @@ import datetime
 import openai
 import dotenv
 import streamlit as st
+from usellm import Message, Options, UseLLM
 
 from audio_recorder_streamlit import audio_recorder
 import requests
@@ -21,6 +22,9 @@ def query(filename):
         data = f.read()
     response = requests.post(API_URL, headers=headers, data=data)
     return response.json()
+
+# Initialize the service
+service = UseLLM(service_url="https://usellm.org/api/llm")
 
 
 def transcribe(audio_file):
@@ -56,7 +60,18 @@ def transcribe_audio(file_path):
     # with open(file_path, "rb") as audio_file:
     transcript = transcribe(file_path)
 
-    return transcript['text']
+    text = transcript['transcript']
+    
+    messages = [
+        Message(role="system", content="Act as a expert English Tutor"),
+        Message(role="user", content=trans),
+    ]
+    options = Options(messages=messages)
+    
+    # Interact with the service
+    response = service.chat(options)
+
+    return response.content
 
 
 def main():
