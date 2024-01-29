@@ -6,15 +6,27 @@ import dotenv
 import streamlit as st
 
 from audio_recorder_streamlit import audio_recorder
+import requests
 
 # import API key from .env file
 dotenv.load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+API_URL = "https://api-inference.huggingface.co/models/openai/whisper-small"
+headers = {"Authorization": "Bearer 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"}
+
+
+def query(filename):
+    with open(filename, "rb") as f:
+        data = f.read()
+    response = requests.post(API_URL, headers=headers, data=data)
+    return response.json()
+
 
 def transcribe(audio_file):
-    transcript = openai.Audio.transcribe("whisper-1", audio_file)
-    return transcript
+    output = query("sample1.flac")
+    # transcript = openai.Audio.transcribe("whisper-1", audio_file)
+    return output
 
 
 def save_audio_file(audio_bytes, file_extension):
