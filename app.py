@@ -24,7 +24,7 @@ def query(filename):
 
 
 def transcribe(audio_file):
-    output = query("sample1.flac")
+    output = query(audio_file)
     # transcript = openai.Audio.transcribe("whisper-1", audio_file)
     return output
 
