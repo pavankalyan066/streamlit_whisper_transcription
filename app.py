@@ -64,7 +64,7 @@ def transcribe_audio(file_path):
     
     messages = [
         Message(role="system", content="Act as a expert English Tutor"),
-        Message(role="user", content=trans),
+        Message(role="user", content=text),
     ]
     options = Options(messages=messages)
     
